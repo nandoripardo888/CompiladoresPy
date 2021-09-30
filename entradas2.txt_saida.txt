@@ -1,0 +1,51 @@
+########################################
+########################################
+				VARIAVEIS
+########################################
+termo | token | valor | usado | tipo
+a|ident||used|real
+b|ident||used|real
+########################################
+########################################
+########################################
+########################################
+				VARIAVEIS
+termo | token | valor | usado | tipo
+<programa>
+<corpo>
+<dc>
+<dcV>
+<variaveis>
+<maisVar>
+<variaveis>
+<maisVar>
+<maisDc>
+<dc>
+<comandos>
+<comando>
+<condicional>
+<condicao>
+<expressao>
+<termo>
+<opUn>
+<fator>
+<maisFatores>
+<outrosTermos>
+<relacao>
+<expressao>
+<termo>
+<opUn>
+<fator>
+<maisFatores>
+<outrosTermos>
+<comandos>
+<comando>
+<parIdent>
+<maisComandos>
+<pFalsa>
+<comandos>
+<comando>
+<parIdent>
+<maisComandos>
+<maisComandos>
+TUDO CERTO
