@@ -81,19 +81,19 @@
 	<p><code>&lt;corpo&gt; -&gt; &lt;dc&gt; begin &lt;comandos&gt; end</code></p>
 	</li>
 	<li>
-	<p><code>&lt;dc&gt; -&gt; &lt;dc_v&gt; &lt;mais_dc&gt; | &lambda;</code></p>
+	<p><code>&lt;dc&gt; -&gt; &lt;dc_v&gt; &lt;mais_dc&gt; | &lambda; </code></p>
 	</li>
 	<li>
 	<p><code>&lt;mais_dc&gt; -&gt; ; &lt;dc&gt; | &lambda;</code></p>
 	</li>
 	<li>
-	<p><code>&lt;dc_v&gt; -&gt; &lt;tipo_var&gt; : &lt;variaveis&gt;&nbsp; {addtype(id.entry, T.type) }</code></p>
+	<p><code>&lt;dc_v&gt; -&gt; &lt;tipo_var&gt; : &lt;variaveis&gt; </code></p>
 	</li>
 	<li>
-	<p><code>&lt;tipo_var&gt; -&gt; real | integer</code></p>
+	<p><code>&lt;tipo_var&gt; -&gt; real | integer <span style="color:#FF0000">{Memoria.tipo=real or Memoria.tipo=integer}</span></code></p>
 	</li>
 	<li>
-	<p><code>&lt;variaveis&gt; -&gt; ident &lt;mais_var&gt;</code></p>
+	<p><code>&lt;variaveis&gt; -&gt; ident &lt;mais_var&gt; <span style="color:#FF0000">{inserir(Memoria.tipo)}{emtabela(ident.termo)}</span></code></p>
 	</li>
 	<li>
 	<p><code>&lt;mais_var&gt; -&gt; , &lt;variaveis&gt; | &lambda;</code></p>
@@ -105,7 +105,16 @@
 	<p><code>&lt;mais_comandos&gt; -&gt; ; &lt;comandos&gt; | &lambda;</code></p>
 	</li>
 	<li>
-	<p><code>&lt;comando&gt; -&gt; read (ident) |write (ident) |ident := &lt;expressao&gt; |if &lt;condicao&gt; then &lt;comandos&gt; &lt;pfalsa&gt; $</code></p>
+	<p><code>&lt;comando&gt; -&gt; read &lt;parident&gt; |write &lt;parident&gt; |ident|if</code></p>
+	</li>
+	<li>
+	<p><code>&lt;parident&gt; -&gt; (ident)</code></p>
+	</li>
+	<li>
+	<p><code>&lt;atribuir_val&gt; -&gt; := &lt;expressao&gt; <span style="color:#FF0000">{setvarutilizada(ident.termo)} {emtabela(ident.termo)}</span></code></p>
+	</li>
+	<li>
+	<p><code>&lt;condicional&gt; -&gt; &lt;condicao&gt; then &lt;comandos&gt; &lt;pfalsa&gt; $</code></p>
 	</li>
 	<li>
 	<p><code>&lt;condicao&gt; -&gt; &lt;expressao&gt; &lt;relacao&gt; &lt;expressao&gt;</code></p>
@@ -123,28 +132,19 @@
 	<p><code>&lt;op_un&gt; -&gt; - | &lambda;</code></p>
 	</li>
 	<li>
-	<p><code>&lt;fator&gt; -&gt; ident | numero_int | numero_real | (&lt;expressao&gt;)</code></p>
+	<p><code>&lt;fator&gt; -&gt; ident <span style="color:#FF0000">{setvarutilizada(ident.termo)}{emtabela(ident.termo)}</span> | numero_int | numero_real | (&lt;expressao&gt;)</code></p>
 	</li>
 	<li>
-	<p><code>&lt;outros_termos&gt; -&gt; &lt;op_ad&gt; &lt;termo&gt; </code></p>
-	</li>
-	<li>
-	<p><code>&lt;outros_termos&gt; | &lambda;</code></p>
+	<p><code>&lt;outros_termos&gt; -&gt; &lt;op_ad&gt; &lt;termo&gt; &lt;outros_termos&gt; | &lambda;</code></p>
 	</li>
 	<li>
 	<p><code>&lt;op_ad&gt; -&gt; + | -</code></p>
 	</li>
 	<li>
-	<p><code>&lt;mais_fatores&gt; -&gt; &lt;op_mul&gt; &lt;fator&gt; </code></p>
-	</li>
-	<li>
-	<p><code>&lt;mais_fatores&gt; | &lambda;</code></p>
+	<p><code>&lt;mais_fatores&gt; -&gt; &lt;op_mul&gt; &lt;fator&gt; &lt;mais_fatores&gt; | &lambda;</code></p>
 	</li>
 	<li>
 	<p><code>&lt;op_mul&gt; -&gt; * | /</code></p>
-	</li>
-	<li>
-	<p><code>&lt;pfalsa&gt; -&gt; else &lt;comandos&gt; | &lambda;</code></p>
 	</li>
 </ul>
 
@@ -153,10 +153,10 @@
 <p>para an&aacute;lise Sem&acirc;ntica foram adicionadas as seguintes regras</p>
 
 <ul>
-	<li>atribuir tipo ao identificador na tabela de simbolos</li>
-	<li>verificar se um&nbsp;identificador foi declarada para ser usada.</li>
-	<li>garantir unicidade de identificador</li>
-	<li>verificar variaveis utilizadas</li>
+	<li>atribuir tipo ao identificador na tabela de simbolos -&gt;&nbsp;{Memoria.tipo=real or Memoria.tipo=integer} e&nbsp;{inserir(Memoria.tipo)}</li>
+	<li>verificar se um&nbsp;identificador foi declarada para ser usada. -&gt;&nbsp;{emtabela{ident.termo}</li>
+	<li>garantir unicidade de identificador -&gt;&nbsp;{setvarutilizada(ident.termo)} {emtabela(ident.termo)}</li>
+	<li>verificar variaveis utilizadas -&gt;&nbsp;{setvarutilizada(ident.termo)</li>
 </ul>
 
 <p>&nbsp;</p>
