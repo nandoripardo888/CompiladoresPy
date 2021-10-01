@@ -1,161 +1,93 @@
-<h1>DOCUMENTA&Ccedil;&Atilde;O DO PROJETO</h1>
+DOCUMENTAÇÃO DO PROJETO
+Arquivos de códigos-fonte presentes
+main.py - executa todo o código fonte.
+analisadorSintatico.py - contém o arquivo do analisador sintático.
+analisadorLexico.py - contém o código analisador Léxico.
+exemplo1.txt - contém um arquivo de programa a ser analisado.
+exemplo2.txt - contém um arquivo de programa inválido a ser analisado.
+fases de desenvolvimento
+Parte 1 - Analisador Léxico.
+parte 2 - Analisador Sintático.
+parte 3 - Analisador Semântico.
+DESENVOLVIMENTO
+Foi implementado um analisador léxico para a seguinte tabela de símbolos
 
-<h2>Arquivos de c&oacute;digos-fonte presentes</h2>
+Palavra Token	Expressão regular correspondente
+KeyWords	if then else write read integer real program begin end
+Identificadores	(Letra)*
+Numero	(Digito)*
+Letra	a..z
+Dígito	0..9
+Operadores	= < <= <> > >= := 
+Símbolos	; , : $ ( ) { } [ ]
+regras Léxicas
+seguinte o autômato abaixo:
 
-<ol>
-	<li style="text-align:justify"><strong>main.py</strong> - executa todo o c&oacute;digo fonte.</li>
-	<li style="text-align:justify"><strong>analisadorSintatico.py</strong> - cont&eacute;m o arquivo do analisador sint&aacute;tico.</li>
-	<li style="text-align:justify"><strong>analisadorLexico.py</strong> - cont&eacute;m o c&oacute;digo analisador L&eacute;xico.</li>
-	<li style="text-align:justify"><strong>exemplo1.txt</strong> - cont&eacute;m um arquivo de programa a ser analisado.</li>
-	<li style="text-align:justify"><strong>exemplo2.txt</strong> - cont&eacute;m um arquivo de programa inv&aacute;lido a ser analisado.</li>
-</ol>
+Autômato Analisador Léxico
 
-<h2>fases de desenvolvimento</h2>
 
-<ul>
-	<li>Parte 1 - Analisador L&eacute;xico.</li>
-	<li>parte 2&nbsp;- Analisador Sint&aacute;tico.</li>
-	<li>parte 3 - Analisador Sem&acirc;ntico.</li>
-</ul>
 
-<h2>DESENVOLVIMENTO</h2>
+Gramática Livre de Contexto da Linguagem - Forma BNF
+<programa> -> program ident <corpo> .
 
-<p>Foi implementado um analisador l&eacute;xico para a seguinte tabela de s&iacute;mbolos</p>
+<corpo> -> <dc> begin <comandos> end
 
-<table>
-	<thead>
-		<tr>
-			<th>Palavra Token</th>
-			<th>Express&atilde;o regular correspondente</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>KeyWords</td>
-			<td>if then else write read integer real program begin end</td>
-		</tr>
-		<tr>
-			<td>Identificadores</td>
-			<td>(Letra)*</td>
-		</tr>
-		<tr>
-			<td>Numero</td>
-			<td>(Digito)*</td>
-		</tr>
-		<tr>
-			<td>Letra</td>
-			<td>a..z</td>
-		</tr>
-		<tr>
-			<td>D&iacute;gito</td>
-			<td><code>0..9</code></td>
-		</tr>
-		<tr>
-			<td>Operadores</td>
-			<td>= &lt; &lt;= &lt;&gt; &gt; &gt;= :=&nbsp;</td>
-		</tr>
-		<tr>
-			<td>S&iacute;mbolos</td>
-			<td><code>; , : $ ( ) { } [ ]</code></td>
-		</tr>
-	</tbody>
-</table>
+<dc> -> <dc_v> <mais_dc> | λ
 
-<h2>regras L&eacute;xicas</h2>
+<mais_dc> -> ; <dc> | λ
 
-<p>seguinte o aut&ocirc;mato abaixo:</p>
+<dc_v> -> <tipo_var> : <variaveis>  {addtype(id.entry, T.type) }
 
-<h3 style="text-align:center"><strong>Aut&ocirc;mato Analisador L&eacute;xico</strong></h3>
+<tipo_var> -> real | integer
 
-<p style="text-align:center"><img alt="" height="201" src="https://i.stack.imgur.com/Wgyh1.png" width="715" /></p>
+<variaveis> -> ident <mais_var>
 
-<h2>&nbsp;</h2>
+<mais_var> -> , <variaveis> | λ
 
-<h2>Gram&aacute;tica Livre de Contexto da Linguagem - Forma BNF</h2>
+<comandos> -> <comando> <mais_comandos>
 
-<ul>
-	<li>
-	<p><code>&lt;programa&gt; -&gt; program ident &lt;corpo&gt; .</code></p>
-	</li>
-	<li>
-	<p><code>&lt;corpo&gt; -&gt; &lt;dc&gt; begin &lt;comandos&gt; end</code></p>
-	</li>
-	<li>
-	<p><code>&lt;dc&gt; -&gt; &lt;dc_v&gt; &lt;mais_dc&gt; | &lambda;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;mais_dc&gt; -&gt; ; &lt;dc&gt; | &lambda;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;dc_v&gt; -&gt; &lt;tipo_var&gt; : &lt;variaveis&gt;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;tipo_var&gt; -&gt; real | integer</code></p>
-	</li>
-	<li>
-	<p><code>&lt;variaveis&gt; -&gt; ident &lt;mais_var&gt;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;mais_var&gt; -&gt; , &lt;variaveis&gt; | &lambda;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;comandos&gt; -&gt; &lt;comando&gt; &lt;mais_comandos&gt;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;mais_comandos&gt; -&gt; ; &lt;comandos&gt; | &lambda;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;comando&gt; -&gt; read (ident) |write (ident) |ident := &lt;expressao&gt; |if &lt;condicao&gt; then &lt;comandos&gt; &lt;pfalsa&gt; $</code></p>
-	</li>
-	<li>
-	<p><code>&lt;condicao&gt; -&gt; &lt;expressao&gt; &lt;relacao&gt; &lt;expressao&gt;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;relacao&gt; -&gt; = | &lt;&gt; | &gt;= | &lt;= | &gt; | &lt;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;expressao&gt; -&gt; &lt;termo&gt; &lt;outros_termos&gt;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;termo&gt; -&gt; &lt;op_un&gt; &lt;fator&gt; &lt;mais_fatores&gt;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;op_un&gt; -&gt; - | &lambda;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;fator&gt; -&gt; ident | numero_int | numero_real | (&lt;expressao&gt;)</code></p>
-	</li>
-	<li>
-	<p><code>&lt;outros_termos&gt; -&gt; &lt;op_ad&gt; &lt;termo&gt; </code></p>
-	</li>
-	<li>
-	<p><code>&lt;outros_termos&gt; | &lambda;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;op_ad&gt; -&gt; + | -</code></p>
-	</li>
-	<li>
-	<p><code>&lt;mais_fatores&gt; -&gt; &lt;op_mul&gt; &lt;fator&gt; </code></p>
-	</li>
-	<li>
-	<p><code>&lt;mais_fatores&gt; | &lambda;</code></p>
-	</li>
-	<li>
-	<p><code>&lt;op_mul&gt; -&gt; * | /</code></p>
-	</li>
-	<li>
-	<p><code>&lt;pfalsa&gt; -&gt; else &lt;comandos&gt; | &lambda;</code></p>
-	</li>
-</ul>
+<mais_comandos> -> ; <comandos> | λ
 
-<h2>Informa&ccedil;&otilde;es Gerais:</h2>
+<comando> -> read (ident) |write (ident) |ident := <expressao> |if <condicao> then <comandos> <pfalsa> $
 
-<ul>
-	<li>O analisador sint&aacute;tico constru&iacute;do foi do tipo Descendente Preditivo Recursivo. Para cada s&iacute;mbolo n&atilde;o-terminal da gram&aacute;tica, uma nova fun&ccedil;&atilde;o foi constru&iacute;da. As produ&ccedil;&otilde;es da gram&aacute;tica foram representadas por chamadas sucessivas dessas fun&ccedil;&otilde;es.</li>
-	<li>Quando um erro l&eacute;xico ou Sint&aacute;tico ou Sem&acirc;ntico &eacute; encontrado o programa &eacute; parado imediatamente uma vez que o analisador sint&aacute;tico pode encontrar erros em cascata devido ao erro inicial. e para os erros Sint&aacute;ticos e sem&acirc;nticos &eacute; colocado no arquivo o erro e a linha onde este se encontra.</li>
-	<li>o programa main.py ao iniciar ira procurar todos os arquivos com extens&atilde;o&nbsp; .txt e ir&aacute; tentar compilar cada um deles, gerando uma saida individual para cada uma das entradas encontradas onde constar&aacute; as fun&ccedil;&otilde;es ou seja&nbsp; cada s&iacute;mbolo n&atilde;o-terminal da gram&aacute;tica ou os possiveis erros. (entrada.txt) -&gt; (entrada_saida.txt).</li>
-	<li>No emulador terminal ser&atilde;o printados cada uma das fun&ccedil;&otilde;es ou seja&nbsp; cada s&iacute;mbolo n&atilde;o-terminal da gram&aacute;tica.</li>
-	<li>por fim se o arquivo estiver de acordo com a linguagem &eacute; printado uma mensagem de sucesso tanto no arquivo quanto no emulador.</li>
-</ul>
+<condicao> -> <expressao> <relacao> <expressao>
 
-<p>&nbsp;</p>
+<relacao> -> = | <> | >= | <= | > | <
+
+<expressao> -> <termo> <outros_termos>
+
+<termo> -> <op_un> <fator> <mais_fatores>
+
+<op_un> -> - | λ
+
+<fator> -> ident | numero_int | numero_real | (<expressao>)
+
+<outros_termos> -> <op_ad> <termo>
+
+<outros_termos> | λ
+
+<op_ad> -> + | -
+
+<mais_fatores> -> <op_mul> <fator>
+
+<mais_fatores> | λ
+
+<op_mul> -> * | /
+
+<pfalsa> -> else <comandos> | λ
+
+Analise sintática:
+para análise Semântica foram adicionadas as seguintes regras
+
+atribuir tipo ao identificador na tabela de simbolos
+verificar se um identificador foi declarada para ser usada.
+garantir unicidade de identificador
+verificar variaveis utilizadas
+
+
+Informações Gerais:
+O analisador sintático construído foi do tipo Descendente Preditivo Recursivo. Para cada símbolo não-terminal da gramática, uma nova função foi construída. As produções da gramática foram representadas por chamadas sucessivas dessas funções.
+Quando um erro léxico ou Sintático ou Semântico é encontrado o programa é parado imediatamente uma vez que o analisador sintático pode encontrar erros em cascata devido ao erro inicial. e para os erros Sintáticos e semânticos é colocado no arquivo o erro e a linha onde este se encontra.
+o programa main.py ao iniciar ira procurar todos os arquivos com extensão  .txt e irá tentar compilar cada um deles, gerando uma saida individual para cada uma das entradas encontradas onde constará as funções ou seja  cada símbolo não-terminal da gramática ou os possiveis erros. (entrada.txt) -> (entrada_saida.txt).
+No emulador terminal serão printados cada uma das funções ou seja  cada símbolo não-terminal da gramática.
+por fim se o arquivo estiver de acordo com a linguagem é printado uma mensagem de sucesso tanto no arquivo quanto no emulador.
