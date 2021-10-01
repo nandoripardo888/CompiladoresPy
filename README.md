@@ -68,7 +68,7 @@
 <h3 style="text-align:center"><strong>Aut&ocirc;mato Analisador L&eacute;xico</strong></h3>
 
 <p style="text-align:center"><img alt="" height="201" src="https://i.stack.imgur.com/Wgyh1.png" width="715" /></p>
-![alt text](https://github.com/nandoripardo888/CompiladoresPy/blob/main/automato.png?raw=true)
+https://github.com/nandoripardo888/CompiladoresPy/blob/main/automato.png?
 
 
 <h2>&nbsp;</h2>
