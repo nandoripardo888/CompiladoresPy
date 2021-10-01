@@ -9,9 +9,21 @@ for diretorio, subpastas, arquivos in os.walk("./"):
         if arquivo.endswith(".txt") and not(arquivo.endswith("_saida.txt")):
             lista.append(os.path.join(diretorio, arquivo))
 
-
-print(lista)
+print('arquivos encontrados:')
+print("\n".join(lista))
+lista2 = []
 for arq in lista:
     sintatico = AnalisadorSintatico(arq)
-    sintatico.analise()
-    print(sintatico.tabelaHASH.tabelaSimbolo)
+    print("*"*50)
+    print(arq)
+    try:
+        sintatico.analise()
+        lista2.append("SUCESSO!")
+    except Exception as inst:
+        print(inst)
+        sintatico.tokens_saida.append(inst)
+        lista2.append("FALHA! - " + str(inst))
+    escreverDocumento(sintatico.path + "_saida.txt",sintatico.tokens_saida,sintatico.tabelaHASH.tabelaSimbolo)
+
+for i in range(len(lista)):
+    print(lista[i].replace("./","") + " -> " + lista2[i])

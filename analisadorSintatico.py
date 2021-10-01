@@ -1,6 +1,6 @@
 from ntpath import join
 from os import scandir
-from analisadorSemantico import *
+from analisadorLexico import *
 
 
 class tabelaHsh():
@@ -92,7 +92,7 @@ class AnalisadorSintatico:
         if self.simbolo is None:
             self.tokens_saida.append("TUDO CERTO")
             print("tudo Certo")
-            escreverDocumento(self.path + "_saida.txt",self.tokens_saida,self.tabelaHASH.tabelaSimbolo)
+            #escreverDocumento(self.path + "_saida.txt",self.tokens_saida,self.tabelaHASH.tabelaSimbolo)
         else:
             raise Exception('Erro sintatico, esperado fim de cadeia LINHA:' + str(self.scan.LINHA))
 

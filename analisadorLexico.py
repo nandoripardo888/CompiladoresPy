@@ -64,10 +64,6 @@ class HashTable_:
              raise Exception('Operador inválido, linha: ' + str(ScannerLexema.LINHA))
 
         
-
-
-
-
 class Token:
     INIT = 0
     IDENTIFICADOR = 1
@@ -162,7 +158,7 @@ class ScannerLexema:
                     self.estado = 3
                 elif (self.isSimbolo(char_)):
                     termo += char_
-                    self.estado = 8
+                    self.estado = 7
                 elif (self.isEspaco(char_)):
                     self.estado = 0
                 elif (char_ == "$$"):
@@ -213,17 +209,13 @@ class ScannerLexema:
                 self.back(char_)
                 return Token(getSimbolo("int"),termo)
             if (self.estado == 7):
-                if (self.isEspaco(char_)):
-                    self.estado = 0
-                    return Token(Token.INIT,"")
-            if (self.estado == 8):
                 #if (termo in ['<','>',":"] and char_ in ["<",">","="]):
                 #    self.estado = 9
                 #    termo += char_
                 #else:
                     self.back(char_)
-                    self.estado = 9
-            if (self.estado == 9):
+                    self.estado = 8
+            if (self.estado == 8):
                 if termo  in tabelaSimbolo.keys():
                     return Token(HashTable_.getOperadoresValidos(termo),termo)
                 else:
