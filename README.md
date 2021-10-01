@@ -146,6 +146,9 @@
 	<li>
 	<p><code>&lt;op_mul&gt; -&gt; * | /</code></p>
 	</li>
+	<li>
+	<p><code>&lt;pfalsa&gt; -&gt; else &lt;comandos&gt; | λ</code></p>
+	</li>
 </ul>
 
 <h2>Analise sint&aacute;tica:</h2>
